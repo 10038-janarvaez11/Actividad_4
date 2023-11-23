@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to bottom right, #ffcc66, #ff6666); /* Fondo degradado */
+}
+
+#Narvaez {
+    text-align: center;
+}
+
+button {
+    padding: 15px 30px; /* Aumentar el padding para un botón más grande */
+    font-size: 18px; /* Tamaño de fuente más grande */
+    cursor: pointer;
+    border: none;
+    border-radius: 100px; /* Bordes redondeados */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #ff9933; /* Cambiar el color al pasar el mouse */
+    transform: scale(1.1); /* Agrandar al pasar el mouse */
+}
+
+div {
+    margin-top: 20px;
+    font-size: 18px;
+}

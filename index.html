@@ -1,0 +1,80 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Comunicación de Componentes con Eventos</title>
+        <link rel="stylesheet" href="./css/estilos.css">
+    </head>
+    <body>
+
+        <div id="Narvaez"></div>
+
+        <script>
+            // Componente Interactivo con el botón
+            class BotonComponente {
+                constructor() {
+                    this.elemento = document.createElement('button');
+                    this.elemento.textContent = '¿Quieres saber la hora?';
+
+                    // Manejar el evento de clic en el botón
+                    this.elemento.addEventListener('click', () => {
+                        // Emitir un evento personalizado con información relevante
+                        const eventoPersonalizado = new CustomEvent('clicEnBoton', {
+                            detail: {
+                                mensaje: 'Quito',
+                                fecha: new Date().toLocaleDateString(),
+                                hora: new Date().toLocaleTimeString(),
+                            },
+                        });
+                        document.dispatchEvent(eventoPersonalizado);
+                    });
+                }
+
+                getElement() {
+                    return this.elemento;
+                }
+            }
+
+            // Componente que muestra información basada en eventos
+            class MensajeComponente {
+                constructor() {
+                    this.elemento = document.createElement('div');
+                    this.elemento.textContent = 'Esperando clic en el botón...';
+
+                    // Escuchar el evento personalizado
+                    document.addEventListener('clicEnBoton', this.actualizarMensaje.bind(this));
+                }
+
+                getElement() {
+                    return this.elemento;
+                }
+
+                // Actualizar el mensaje cuando se recibe el evento personalizado
+                actualizarMensaje(event) {
+                    const mensaje = event.detail.mensaje;
+                    const fecha = event.detail.fecha;
+                    const hora = event.detail.hora;
+
+                    this.elemento.innerHTML = `
+                        Informacion de: ${mensaje} <br>
+                        Fecha: ${fecha} <br>
+                        Hora: ${hora} 
+                    `;
+
+                    // Puedes realizar otras acciones aquí basadas en la información del evento
+                }
+            }
+
+            // Crear instancias de los componentes
+            const botonComponente = new BotonComponente();
+            const mensajeComponente = new MensajeComponente();
+
+            // Agregar los componentes al DOM
+            const appElement = document.getElementById('Narvaez');
+            appElement.appendChild(botonComponente.getElement());
+            appElement.appendChild(mensajeComponente.getElement());
+        </script>
+
+    </body>
+    </html>
